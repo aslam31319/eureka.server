@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka-server
+spec:
+  selector:
+    matchLabels:
+      app: eureka-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eureka-server
+    spec:
+      containers:
+        - name: eureka-server
+          image: springio/eureka-server
+          args: ["--spring.profiles.active=prod"]
+          imagePullPolicy: Never
+          ports:
+            - name: sbapp
+              containerPort: 8080
+              protocol: TCP
